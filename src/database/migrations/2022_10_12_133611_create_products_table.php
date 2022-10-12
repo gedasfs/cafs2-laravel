@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->float('price', 8, 2)->nullable();
-            $table->unsignedTinyInteger('stock')->default(0);
+            $table->float('price', 8, 2)->default(0);
+            $table->unsignedInteger('stock')->default(0);
             $table->boolean('active')->default(FALSE);
             $table->timestamps();
         });

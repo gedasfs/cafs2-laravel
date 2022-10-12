@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('cart_id')->constrained('carts')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('user_payment_type_id')->constrained('user_payment_types')->onDelete('cascade');
+            $table->foreignId('user_payment_type_id')->nullable()->constrained('user_payment_types')->onDelete('cascade');
             $table->string('number');
             $table->string('status')->default('Created');
             $table->string('shipping_type')->nullable();
