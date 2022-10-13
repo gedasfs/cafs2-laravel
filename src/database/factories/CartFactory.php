@@ -21,11 +21,11 @@ class CartFactory extends Factory
     {
         $cartContent = [
             [
-                'product_id' => Product::factory(),
+                'product_id' => Product::factory()->create()->id,
                 'qty' => fake()->numberBetween(1, 10),
             ],
             [
-                'product_id' => Product::factory(),
+                'product_id' => Product::factory()->create()->id,
                 'qty' => fake()->numberBetween(1, 10),
             ]
         ];
