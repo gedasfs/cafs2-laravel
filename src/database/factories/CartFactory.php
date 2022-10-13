@@ -19,16 +19,16 @@ class CartFactory extends Factory
      */
     public function definition()
     {
-        $cartContent = [
-            [
+        $itemCount = fake()->numberBetween(1, 10);
+
+        $cartContent = [];
+
+        for ($i=1; $i <= $itemCount; $i++) {
+            $cartContent[] = [
                 'product_id' => Product::factory()->create()->id,
                 'qty' => fake()->numberBetween(1, 10),
-            ],
-            [
-                'product_id' => Product::factory()->create()->id,
-                'qty' => fake()->numberBetween(1, 10),
-            ]
-        ];
+            ];
+        }
 
         return [
             'user_id' => User::factory(),
