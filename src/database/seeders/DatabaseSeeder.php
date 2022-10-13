@@ -30,6 +30,9 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             DeliverySeeder::class,
             PaymentSeeder::class,
+            DeliveryStatusSeeder::class,
+            OrderStatusSeeder::class,
+            PaymentStatusSeeder::class,
         ]);
     }
 
