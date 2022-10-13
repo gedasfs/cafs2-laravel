@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\Order;
+use App\Models\User;
+use App\Models\DeliveryStatus;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Delivery>
@@ -18,12 +20,9 @@ class DeliveryFactory extends Factory
      */
     public function definition()
     {
-
-        $firstRandOrder = Order::inRandomOrder()->first();
-
         return [
-            'user_id' => $firstRandOrder->user->id,
-            'order_id' => $firstRandOrder->id,
+            'user_id' => User::factory(),
+            'order_id' => Order::factory(),
         ];
     }
 }

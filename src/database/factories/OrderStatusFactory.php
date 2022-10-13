@@ -4,14 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Models\Order;
-
-include_once database_path('_counts.php');
+include_once dirname(__DIR__) .  '/_names.php';
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\OrderStatus>
  */
-class PaymentFactory extends Factory
+class OrderStatusFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +19,7 @@ class PaymentFactory extends Factory
     public function definition()
     {
         return [
-            'order_id' => Order::factory(),
+            'name' => fake()->bothify('order-stat-???-###'),
         ];
     }
 }

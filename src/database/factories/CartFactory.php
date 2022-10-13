@@ -19,21 +19,19 @@ class CartFactory extends Factory
      */
     public function definition()
     {
-
-        $maxUsers = User::all()->count();
         $cartContent = [
             [
-                'product_id' => Product::inRandomOrder()->first()->id,
-                'qty' => 2,
+                'product_id' => Product::factory(),
+                'qty' => fake()->numberBetween(1, 10),
             ],
             [
-                'product_id' => Product::inRandomOrder()->first()->id,
-                'qty' => 1,
+                'product_id' => Product::factory(),
+                'qty' => fake()->numberBetween(1, 10),
             ]
         ];
 
         return [
-            'user_id' => fake()->numberBetween(1, $maxUsers),
+            'user_id' => User::factory(),
             'cart_content' => json_encode($cartContent),
         ];
 

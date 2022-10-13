@@ -20,14 +20,10 @@ class OrderFactory extends Factory
      */
     public function definition()
     {
-        $firstRandCart = Cart::inRandomOrder()->first();
-        // $randUserPaymentType = UserPaymentType::where('user_id', $firstRandCart->user->id)->get();
-        $maxUsers = User::all()->count();
-
         return [
-            'cart_id' => $firstRandCart->id,
-            'user_id' => $firstRandCart->user->id,
-            'user_payment_type_id' => fake()->numberBetween(1, $maxUsers),
+            'cart_id' => Cart::factory(),
+            'user_id' => User::factory(),
+            'user_payment_type_id' => UserPaymentType::factory(),
             'number' => fake()->numerify('order-####'),
             'shipping_type' => fake()->randomElement(['shop', 'DPD']),
             'shipping_cost' => fake()->randomFloat(2, 5, 50),

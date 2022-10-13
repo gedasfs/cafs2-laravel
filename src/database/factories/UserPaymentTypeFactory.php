@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\PaymentType;
 
+include_once database_path('_counts.php');
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -22,7 +23,7 @@ class UserPaymentTypeFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'payment_type' => fake()->randomElement(['cash', 'card', 'e-bank']),
+            'payment_type_id' => PaymentType::factory(),
         ];
     }
 }

@@ -17,7 +17,7 @@ class PaymentTypeFactory extends Factory
     public function definition()
     {
         return [
-            'type' => fake()->unique()->randomElement(['cash', 'card', 'e-bank']),
+            'type' => fake()->bothify('paym-type-???-###'),
         ];
     }
 }
