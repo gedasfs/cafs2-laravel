@@ -23,7 +23,7 @@ class CartFactory extends Factory
 
         $cartContent = [];
 
-        for ($i=1; $i <= $itemCount; $i++) {
+        for ($i = 1; $i <= $itemCount; $i++) {
             $cartContent[] = [
                 'product_id' => Product::factory()->create()->id,
                 'qty' => fake()->numberBetween(1, 10),
