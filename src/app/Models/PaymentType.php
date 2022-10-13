@@ -9,8 +9,4 @@ class PaymentType extends Model
 {
     use HasFactory;
 
-    public function userPaymentTypes()
-    {
-        return $this->hasMany(PaymentType::class);
-    }
 }

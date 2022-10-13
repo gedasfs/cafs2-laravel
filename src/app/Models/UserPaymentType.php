@@ -9,11 +9,6 @@ class UserPaymentType extends Model
 {
     use HasFactory;
 
-    public function paymentType()
-    {
-        return $this->belongsTo(PaymentType::class);
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
