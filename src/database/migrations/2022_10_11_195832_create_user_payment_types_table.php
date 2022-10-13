@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('user_payment_types', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('payment_type_id')->constrained('payment_types')->onDelete('cascade');
+            $table->string('payment_type')->nullable();
             $table->json('payment_info')->nullable();
             $table->timestamps();
         });

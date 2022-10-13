@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\PaymentType;
 
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -19,12 +20,9 @@ class UserPaymentTypeFactory extends Factory
      */
     public function definition()
     {
-        $maxUsers = User::all()->count();
-        $maxPaymentTypes = PaymentType::all()->count();
-
         return [
-            'user_id' => fake()->numberBetween(1, $maxUsers),
-            'payment_type_id' => fake()->numberBetween(1, $maxPaymentTypes),
+            'user_id' => User::factory(),
+            'payment_type' => fake()->randomElement(['cash', 'card', 'e-bank']),
         ];
     }
 }
