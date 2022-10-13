@@ -7,8 +7,6 @@ use Illuminate\Database\Seeder;
 
 use App\Models\PaymentType;
 
-include_once database_path('_counts.php');
-
 class PaymentTypeSeeder extends Seeder
 {
     /**
@@ -18,6 +16,6 @@ class PaymentTypeSeeder extends Seeder
      */
     public function run()
     {
-        PaymentType::factory(PAYMENT_TYPES_COUNT)->create();
+        PaymentType::factory(3)->create();
     }
 }
