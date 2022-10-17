@@ -25,8 +25,8 @@ class OrderFactory extends Factory
             'user_id' => User::factory(),
             'user_payment_type_id' => UserPaymentType::factory(),
             'number' => fake()->numerify('order-####'),
-            'shipping_type' => fake()->randomElement(['shop', 'DPD']),
-            'shipping_cost' => fake()->randomFloat(2, 5, 50),
+            // 'shipping_type' => fake()->randomElement(['shop', 'DPD']),
+            // 'shipping_cost' => fake()->randomFloat(2, 5, 50),
             'total_for_items' => fake()->randomFloat(2, 50, 9999),
             'total' => fake()->randomFloat(2, 50, 9999)
         ];

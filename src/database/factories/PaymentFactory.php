@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\Order;
 
-include_once database_path('_counts.php');
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>

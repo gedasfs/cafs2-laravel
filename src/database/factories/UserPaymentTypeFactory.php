@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 use App\Models\PaymentType;
 
-include_once database_path('_counts.php');
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
