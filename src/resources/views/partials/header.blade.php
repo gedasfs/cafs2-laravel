@@ -20,6 +20,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('contact-us.create') }}">Conatcs Us</a></li>
                     </ul>
+                </li>
             </ul>
         </div>
     </div>
