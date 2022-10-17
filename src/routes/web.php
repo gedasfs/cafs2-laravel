@@ -30,8 +30,8 @@ Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderCo
     Route::get('/{order}/show', 'show')->name('show');
 });
 
-Route::prefix('/contacts')->group(function() {
-    Route::prefix('/contact-us')->name('contact-us.')->controller(Controllers\Contacts\ContactUsController::class)->group(function() {
+Route::prefix('/about')->group(function() {
+    Route::prefix('/contact-us')->name('contact-us.')->controller(Controllers\About\ContactUsController::class)->group(function() {
         Route::get('/', 'create')->name('create');
         Route::post('/', 'store')->name('store');
     });
