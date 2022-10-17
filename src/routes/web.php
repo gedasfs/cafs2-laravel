@@ -16,24 +16,24 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\Products\ProductController::class, 'index']);
 
-Route::prefix('/products')->name('products.')->group(function() {
-    Route::get('/', [Controllers\Products\ProductController::class, 'index'])->name('index');
-    Route::get('/create', [Controllers\Products\ProductController::class, 'create'])->name('create');
-    Route::get('/{product}/edit', [Controllers\Products\ProductController::class, 'edit'])->name('edit');
-    Route::get('/{product}/show', [Controllers\Products\ProductController::class, 'show'])->name('show');
+Route::prefix('/products')->name('products.')->controller(Controllers\Products\ProductController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/{product}/edit', 'edit')->name('edit');
+    Route::get('/{product}/show', 'show')->name('show');
 });
 
-Route::prefix('/orders')->name('orders.')->group(function() {
-    Route::get('/', [Controllers\Orders\OrderController::class, 'index'])->name('index');
-    Route::get('/create', [Controllers\Orders\OrderController::class, 'create'])->name('create');
-    Route::get('/{order}/edit', [Controllers\Orders\OrderController::class, 'edit'])->name('edit');
-    Route::get('/{order}/show', [Controllers\Orders\OrderController::class, 'show'])->name('show');
+Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/{order}/edit', 'edit')->name('edit');
+    Route::get('/{order}/show', 'show')->name('show');
 });
 
 Route::prefix('/contacts')->group(function() {
-    Route::prefix('/contact-us')->name('contact-us.')->group(function() {
-        Route::get('/', [Controllers\Contacts\ContactUsController::class, 'create'])->name('create');
-        Route::post('/', [Controllers\Contacts\ContactUsController::class, 'store'])->name('store');
+    Route::prefix('/contact-us')->name('contact-us.')->controller(Controllers\Contacts\ContactUsController::class)->group(function() {
+        Route::get('/', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
     });
 });
 
