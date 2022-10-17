@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('restrict');
-            $table->string('status')->default('Unpaid');
+            $table->unsignedBigInteger('status_id')->default(0);
             $table->dateTime('payment_done_at')->nullable();
             $table->timestamps();
         });

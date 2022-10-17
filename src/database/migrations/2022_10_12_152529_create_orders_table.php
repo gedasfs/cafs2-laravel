@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('user_payment_type_id')->nullable()->constrained('user_payment_types')->onDelete('cascade');
             $table->string('number');
-            $table->string('status')->default('Created');
+            $table->unsignedBigInteger('status_id')->default(0);
             $table->float('total_for_items', 8, 2)->default(0);
             $table->float('total', 8, 2)->default(0);
             $table->timestamps();

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->string('status')->default('Created');
+            $table->unsignedBigInteger('status_id')->default(0);
             $table->timestamps();
         });
     }
