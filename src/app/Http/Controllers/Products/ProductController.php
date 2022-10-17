@@ -12,9 +12,7 @@ class ProductController extends Controller
     {
         $products = Product::get();
 
-        return view('products.index', [
-            'products' => $products,
-        ]);
+        return view('products.index', compact('products'));
     }
 
     public function create()

@@ -12,9 +12,7 @@ class OrderController extends Controller
     {
         $orders = Order::get();
 
-        return view('orders.index', [
-            'orders' => $orders,
-        ]);
+        return view('orders.index', compact('orders'));
     }
 
     public function create()
