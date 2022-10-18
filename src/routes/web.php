@@ -25,8 +25,8 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::prefix('/filter')->name('filter.')->group(function() {
         Route::get('/by-count', 'countAll');
         Route::get('/by-count/{colName}/{colVal}/{action?}', 'countByColWithVal');
-        Route::get('/by-order/name/{sorting?}', 'filterByName');
-        Route::get('/by-order/{colname}/{limit}/{sorting?}', 'filterByOrderWithColWithLimit');
+        Route::get('/by-order/name/{sorting?}', 'filterOrderByName');
+        Route::get('/by-order/active/{limit}/{sorting?}', 'filterOrderByActiveWithLimit');
     });
 });
 
