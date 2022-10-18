@@ -52,34 +52,22 @@ class ProductController extends Controller
         dd($prodCount);
     }
 
-    public function filterByOrderWithCol(Request $request)
+    public function filterOrderByName(Request $request)
     {
-        $prodQuery = DB::table('products');
-
         $sorting = $request->route()->hasParameter('sorting') ? $request->route()->parameter('sorting') : 'desc';
 
-        if ($request->route()->hasParameter('colname')) {
-            $prodQuery->orderBy($request->route()->parameter('colname'), $sorting);
-        }
+        $prodQuery = DB::table('products')->orderBy('name', $sorting);
 
         $products = $prodQuery->get();
 
         dd($products);
     }
 
-    public function filterByOrderWithColWithLimit(Request $request)
+    public function filterOrderByActiveWithLimit(Request $request)
     {
-        $prodQuery = DB::table('products');
-
         $sorting = $request->route()->hasParameter('sorting') ? $request->route()->parameter('sorting') : 'desc';
 
-        if ($request->route()->hasParameter('limit')) {
-            $prodQuery->take($request->route()->parameter('limit'));
-        }
-
-        if ($request->route()->hasParameter('colname')) {
-            $prodQuery->orderBy($request->route()->parameter('colname'), $sorting);
-        }
+        $prodQuery = DB::table('products')->orderBy('active', $sorting)->limit($request->route()->parameter('limit'));
 
         $products = $prodQuery->get();
 
