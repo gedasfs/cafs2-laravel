@@ -21,6 +21,13 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::get('/create', 'create')->name('create');
     Route::get('/{product}/edit', 'edit')->name('edit');
     Route::get('/{product}/show', 'show')->name('show');
+
+    Route::prefix('/filter')->name('filter.')->group(function() {
+        Route::get('/by-count', 'countAll');
+        Route::get('/by-count/{colName}/{colVal}/{action?}', 'countByColWithVal');
+        Route::get('/by-order/{colName}/{sorting?}', 'filterByOrderWithCol');
+        Route::get('/by-order/{colname}/{limit}/{sorting?}', 'filterByOrderWithColWithLimit');
+    });
 });
 
 Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderController::class)->group(function() {
