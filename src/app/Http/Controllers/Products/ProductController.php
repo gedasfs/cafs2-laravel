@@ -16,10 +16,10 @@ class ProductController extends Controller
         $orderBy = [
             'date-desc' => 'Newest first',
             'date-asc' => 'Oldest first',
-            'name-asc' => 'By Name Asc',
-            'name-desc' => 'By Name Desc',
-            'price-asc' => 'By Price Asc',
-            'price-desc' => 'By Price Desc',
+            'name-asc' => 'Name Asc',
+            'name-desc' => 'Name Desc',
+            'price-asc' => 'Price Asc',
+            'price-desc' => 'Price Desc',
         ];
 
         $categoryId = $request->get('category_id');
