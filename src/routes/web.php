@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [Controllers\Products\ProductController::class, 'index']);
+
+Route::prefix('/products')->name('products.')->controller(Controllers\Products\ProductController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/{product}/edit', 'edit')->name('edit');
+    Route::get('/{product}/show', 'show')->name('show');
+
+    Route::prefix('/filter')->name('filter.')->group(function() {
+        Route::get('/', 'filter');
+        Route::get('/by-count', 'countAll');
+        Route::get('/by-count/{colName}/{colVal}/{action?}', 'countByColWithVal');
+        Route::get('/by-order/name/{sorting?}', 'filterOrderByName');
+        Route::get('/by-order/active/{limit}/{sorting?}', 'filterOrderByActiveWithLimit');
+    });
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderController::class)->group(function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::get('/{order}/edit', 'edit')->name('edit');
+    Route::get('/{order}/show', 'show')->name('show');
+});
+
+Route::prefix('/about')->group(function() {
+    Route::prefix('/contact-us')->name('contact-us.')->controller(Controllers\About\ContactUsController::class)->group(function() {
+        Route::get('/', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+    });
+});
+
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

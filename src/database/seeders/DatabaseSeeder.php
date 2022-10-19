@@ -3,7 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+
+use App\Models\PaymentType;
+use App\Models\UserPaymentType;
+use Illuminate\Support\Facades\Facade;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +20,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            UserSeeder::class,
+            PaymentTypeSeeder::class,
+            UserPaymentTypeSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            CartSeeder::class,
+            OrderSeeder::class,
+            DeliverySeeder::class,
+            PaymentSeeder::class,
+            DeliveryStatusSeeder::class,
+            OrderStatusSeeder::class,
+            PaymentStatusSeeder::class,
+        ]);
     }
+
 }
