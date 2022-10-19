@@ -3,17 +3,70 @@
 namespace App\Http\Controllers\Products;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::get();
 
-        return view('products.index', compact('products'));
+        $orderBy = [
+            'date-desc' => 'Newest first',
+            'date-asc' => 'Oldest first',
+            'name-asc' => 'By Name Asc',
+            'name-desc' => 'By Name Desc',
+            'price-asc' => 'By Price Asc',
+            'price-desc' => 'By Price Desc',
+        ];
+
+        $categoryId = $request->get('category_id');
+
+        $productQuery = Product::where('active', true);
+
+        if ($categoryId) {
+            $productQuery->where('category_id', $categoryId);
+        }
+
+        $priceFrom = $request->get('price_from');
+        $priceTo   = $request->get('price_to');
+
+        if ($priceFrom && $priceTo) {
+            $productQuery->where(function($query) use($priceFrom, $priceTo) {
+                $query->where('price', '>', $priceFrom);
+                $query->where('price', '<', $priceTo);
+            });
+        }
+
+        switch ($request->get('order_by')) {
+            case 'name-asc':
+                $productQuery->orderBy('name');
+                break;
+            case 'name-desc':
+                $productQuery->orderBy('name', 'desc');
+                break;
+            case 'price-asc':
+                $productQuery->orderBy('price');
+                break;
+            case 'price-desc':
+                $productQuery->orderBy('price', 'desc');
+                break;
+            case 'date-asc':
+                $productQuery->oldest();
+                break;
+            case 'date-desc':
+            default:
+                $productQuery->latest();
+                break;
+        }
+
+        $categories = Category::get();
+        $products = $productQuery->get();
+
+
+        return view('products.index', compact('products', 'categories', 'orderBy'));
     }
 
     public function create()
@@ -31,48 +84,6 @@ class ProductController extends Controller
         return view('products.show');
     }
 
-
-    public function countAll()
-    {
-        $prodCount = DB::table('products')->count();
-
-        dd($prodCount);
-    }
-
-    public function countByColWithVal(Request $request)
-    {
-        $prodQuery = DB::table('products');
-
-        $action = $request->route()->hasParameter('action') ? $request->route()->parameter('action') : '=';
-        $colName = $request->route()->parameter('colName');
-        $colVal = $request->route()->parameter('colVal');
-
-        $prodCount = $prodQuery->where($colName, $action, $colVal)->count();
-
-        dd($prodCount);
-    }
-
-    public function filterOrderByName(Request $request)
-    {
-        $sorting = $request->route()->hasParameter('sorting') ? $request->route()->parameter('sorting') : 'desc';
-
-        $prodQuery = DB::table('products')->orderBy('name', $sorting);
-
-        $products = $prodQuery->get();
-
-        dd($products);
-    }
-
-    public function filterOrderByActiveWithLimit(Request $request)
-    {
-        $sorting = $request->route()->hasParameter('sorting') ? $request->route()->parameter('sorting') : 'desc';
-
-        $prodQuery = DB::table('products')->orderBy('active', $sorting)->limit($request->route()->parameter('limit'));
-
-        $products = $prodQuery->get();
-
-        dd($products);
-    }
 
     public function filter(Request $request)
     {
@@ -100,7 +111,5 @@ class ProductController extends Controller
             $prodQuery->dump();
             dd($prodQuery->get());
         }
-
-
     }
 }
