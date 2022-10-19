@@ -34,10 +34,8 @@ class ProductController extends Controller
         $priceTo   = $request->get('price_to');
 
         if ($priceFrom && $priceTo) {
-            $productQuery->where(function($query) use($priceFrom, $priceTo) {
-                $query->where('price', '>', $priceFrom);
-                $query->where('price', '<', $priceTo);
-            });
+            $productQuery->where('price', '>', $priceFrom);
+            $productQuery->where('price', '<', $priceTo);
         }
 
         switch ($request->get('order_by')) {
