@@ -23,6 +23,7 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::get('/{product}/show', 'show')->name('show');
 
     Route::prefix('/filter')->name('filter.')->group(function() {
+        Route::get('/', 'filter');
         Route::get('/by-count', 'countAll');
         Route::get('/by-count/{colName}/{colVal}/{action?}', 'countByColWithVal');
         Route::get('/by-order/name/{sorting?}', 'filterOrderByName');
