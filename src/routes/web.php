@@ -22,9 +22,6 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::get('/{product}/edit', 'edit')->name('edit');
     Route::get('/{product}/show', 'show')->name('show');
 
-    Route::prefix('/filter')->name('filter.')->group(function() {
-        Route::get('/', 'filter');
-    });
 });
 
 Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderController::class)->group(function() {
