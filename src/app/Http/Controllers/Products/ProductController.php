@@ -7,6 +7,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -72,15 +74,35 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function edit()
+    public function edit(Product $product)
     {
-        return view('products.edit');
+        return view('products.edit', compact('product'));
     }
 
-    public function show()
+    public function show(Product $product)
     {
-        return view('products.show');
+        return view('products.show', compact('product'));
     }
+
+    public function store(StoreProductRequest $request)
+    {
+        $product = new Product($request->only('name', 'code', 'price', 'category_id', 'description'));
+        $product->active = true;
+        $product->stock = 1;
+
+        $product->save();
+
+        return redirect()->route('products.show', $product->id);
+    }
+
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $product->fill($request->validated());
+        $product->save();
+
+        return redirect()->route('products.show', $product->id);
+    }
+
 
 
     public function filter(Request $request)

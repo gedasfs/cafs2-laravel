@@ -22,6 +22,9 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::get('/{product}/edit', 'edit')->name('edit');
     Route::get('/{product}/show', 'show')->name('show');
 
+    Route::post('/store', 'store')->name('store');
+    Route::post('/{product}/update', 'update')->name('update');
+
     Route::prefix('/filter')->name('filter.')->group(function() {
         Route::get('/', 'filter');
     });

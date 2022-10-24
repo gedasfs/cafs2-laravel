@@ -1,7 +1,9 @@
 @extends('layouts.shop')
 
-@section('title', 'Products - Create')
+@section('title', 'Products - Edit')
 
 @section('content')
-    <h1>Create</h1>
+@include('products.partials.productForm', [
+    'route' => route('products.store'),
+])
 @endsection

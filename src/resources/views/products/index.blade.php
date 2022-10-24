@@ -4,7 +4,10 @@
 
 @section('content')
 @include('products.partials.filter')
-<h2>Products</h2>
+<div class="d-flex my-2">
+    <h2>Products</h2>
+    <a href="{{ route('products.create') }}" class="btn btn-success ms-auto align-self-center">Create</a>
+</div>
 <div class="list-group">
     @foreach ($products as $prod)
     <a href="{{ route('products.show', $prod->id) }}" class="list-group-item list-group-item-action" aria-current="true">

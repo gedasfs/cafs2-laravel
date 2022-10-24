@@ -3,5 +3,12 @@
 @section('title', 'Products - Edit')
 
 @section('content')
-    <h1>Edit</h1>
+@include('products.partials.productForm', [
+    'route' => route('products.update', $product->id),
+    'name' => $product->name,
+    'code' => $product->code,
+    'description' => $product->description,
+    'price' => $product->price,
+    'categoryId' => $product->category_id
+])
 @endsection
