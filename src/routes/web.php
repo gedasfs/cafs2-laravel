@@ -25,9 +25,6 @@ Route::prefix('/products')->name('products.')->controller(Controllers\Products\P
     Route::post('/store', 'store')->name('store');
     Route::post('/{product}/update', 'update')->name('update');
 
-    Route::prefix('/filter')->name('filter.')->group(function() {
-        Route::get('/', 'filter');
-    });
 });
 
 Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderController::class)->group(function() {

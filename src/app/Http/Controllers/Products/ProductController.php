@@ -103,33 +103,4 @@ class ProductController extends Controller
         return redirect()->route('products.show', $product->id);
     }
 
-
-
-    public function filter(Request $request)
-    {
-        $prodQuery = DB::table('products');
-
-        if ($request->has('by-count')) {
-            if ($request->has('colName') && $request->has('value')) {
-                $action = $request->get('action') ?? '=';
-                $prodQuery->where($request->get('colName'), $action, $request->get('value'));
-            }
-
-            $prodQuery->dump();
-            dd($prodQuery->count());
-        } else if ($request->has('by-order')) {
-            $sorting = $request->get('sorting') ?? 'desc';
-
-            if ($request->has('limit')) {
-                $prodQuery->take($request->get('limit'));
-            }
-
-            if ($request->has('colName') && $request->get('colName')) {
-                $prodQuery->orderBy($request->get('colName'), $sorting);
-            }
-
-            $prodQuery->dump();
-            dd($prodQuery->get());
-        }
-    }
 }
