@@ -33,6 +33,7 @@ class CartFactory extends Factory
         return [
             'user_id' => User::factory(),
             'cart_content' => json_encode($cartContent),
+            'total_for_items' => fake()->randomFloat(2, 50, 9999),
         ];
 
 

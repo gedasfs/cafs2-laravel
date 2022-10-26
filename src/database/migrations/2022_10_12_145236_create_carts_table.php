@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->json('cart_content')->nullable();
+            $table->float('total_for_items', 10, 2)->default(0);
             $table->timestamps();
         });
     }

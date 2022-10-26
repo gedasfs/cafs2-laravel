@@ -3,7 +3,11 @@
 @section('title', 'Orders')
 
 @section('content')
-<h2>Orders</h2>
+<div class="d-flex justify-content-between align-items-center">
+    <h2>Orders</h2>
+    <a href="{{ route('orders.create') }}" class="btn btn-success">Create</a>
+</div>
+
 <div class="list-group">
     @foreach ($orders as $order)
     <a href="{{ route('orders.show', $order->id) }}" class="list-group-item list-group-item-action" aria-current="true">

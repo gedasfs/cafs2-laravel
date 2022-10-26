@@ -32,6 +32,9 @@ Route::prefix('/orders')->name('orders.')->controller(Controllers\Orders\OrderCo
     Route::get('/create', 'create')->name('create');
     Route::get('/{order}/edit', 'edit')->name('edit');
     Route::get('/{order}/show', 'show')->name('show');
+
+    Route::post('/store', 'store')->name('store');
+    Route::post('/{order}/update', 'update')->name('update');
 });
 
 Route::prefix('/about')->group(function() {
