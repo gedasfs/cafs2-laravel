@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   nginx:
-    container_name: ca-l9-nginx
+    container_name: codeacademy-l9-nginx
     image: nginx:1.23.1
     working_dir: /var/www
     volumes:
@@ -14,7 +14,7 @@ services:
       - php
 
   php:
-    container_name: ca-l9-php
+    container_name: codeacademy-l9-php
     # image: php:8.1.1-fpm-alpine3.15
     build: ./docker/php/
     working_dir: /var/www
@@ -27,7 +27,7 @@ services:
       - mariadb
 
   mariadb:
-    container_name: ca-l9-mariadb
+    container_name: codeacademy-l9-mariadb
     image: mariadb:10.9
     env_file:
         - ./docker/mysql/.env
@@ -35,3 +35,10 @@ services:
         - ./docker/mysql/data/mariadb:/var/lib/mysql
     ports:
         - 3307:3306
+  
+  mailhog:
+    container_name: codeacademy-l9-mailhog
+    image: mailhog/mailhog:v1.0.1
+    ports:
+        - 8025:8025
+        - 1025:1025

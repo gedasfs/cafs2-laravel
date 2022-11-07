@@ -44,6 +44,8 @@ Route::prefix('/about')->group(function() {
     });
 });
 
+Route::view('vue', 'layouts.shop-vue');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
