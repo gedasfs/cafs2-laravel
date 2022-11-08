@@ -41,11 +41,6 @@
         categories.value = categoriesResponse.data.data;
     }
 
-    function fetchData() {
-        getCategories();
-        getProducts();
-    }
-
     function initFormFields() {
         categorySelect.value = 0;
         orderBySelect.value = 'date-desc';
@@ -64,7 +59,8 @@
 
     onBeforeMount(() => {
         initFormFields();
-        fetchData();
+        getCategories();
+        getProducts();
     });
 </script>
 
@@ -95,7 +91,7 @@
         <button type="button" class="btn btn-success me-2" @click="clearForm">Clear</button>
     </form>
 
-    <div class="list-group mt-4" v-if="products.length > 0">
+    <div class="list-group mt-4" v-if="products?.length > 0">
         <a v-for="prod in products" href="#" class="list-group-item list-group-item-action" aria-current="true">
             <small># {{ prod.id }}</small>
             <div class="d-flex w-100 justify-content-between">
