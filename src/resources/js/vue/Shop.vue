@@ -23,12 +23,12 @@
     };
 
 
-    async function getProducts() {
+    async function loadProducts() {
         let productsIndexUrlWithFilters = productsIndexUrl;
 
         productsIndexUrlWithFilters += categorySelect.value != 0  ?  `?category_id=${categorySelect.value}&` : '?' ;
         productsIndexUrlWithFilters += priceFrom.value      != '' ?  `price_from=${priceFrom.value}&`        : '' ;
-        productsIndexUrlWithFilters += priceTo.value      != '' ?  `price_to=${priceTo.value}&`            : '' ;
+        productsIndexUrlWithFilters += priceTo.value        != '' ?  `price_to=${priceTo.value}&`            : '' ;
         productsIndexUrlWithFilters += `order_by=${orderBySelect.value}&`;
 
         let productsResponse = await axios.get(productsIndexUrlWithFilters);
@@ -36,7 +36,7 @@
         products.value = productsResponse.data.data;
     }
 
-    async function getCategories() {
+    async function loadCategories() {
         let categoriesResponse = await axios.get(categoriesIndexUrl);
         categories.value = categoriesResponse.data.data;
     }
@@ -49,18 +49,18 @@
     }
 
     function submitForm(event) {
-        getProducts();
+        loadProducts();
     }
 
     function clearForm(event){
         initFormFields();
-        fetchData();
+        loadProducts();
     }
 
     onBeforeMount(() => {
         initFormFields();
-        getCategories();
-        getProducts();
+        loadCategories();
+        loadProducts();
     });
 </script>
 
