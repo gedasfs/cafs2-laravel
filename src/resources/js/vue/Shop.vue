@@ -28,7 +28,7 @@
 
         productsIndexUrlWithFilters += categorySelect.value != 0  ?  `?category_id=${categorySelect.value}&` : '?' ;
         productsIndexUrlWithFilters += priceFrom.value      != '' ?  `price_from=${priceFrom.value}&`        : '' ;
-        productsIndexUrlWithFilters += priceFrom.value      != '' ?  `price_to=${priceTo.value}&`            : '' ;
+        productsIndexUrlWithFilters += priceTo.value      != '' ?  `price_to=${priceTo.value}&`            : '' ;
         productsIndexUrlWithFilters += `order_by=${orderBySelect.value}&`;
 
         let productsResponse = await axios.get(productsIndexUrlWithFilters);
