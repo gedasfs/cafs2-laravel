@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'name' => fake()-> words(3, true),
             'description' => fake()->paragraph(),
             'image' => sprintf('/images/products/%s.jpg', fake()->lexify('img-????')),
-            'price' => fake()->randomFloat(2, 0, 999999.99),
+            'price' => fake()->randomFloat(2, 0, 999.99),
             'stock' => fake()->randomDigit(),
             'active' => fake()->numberBetween(0, 1),
         ];
