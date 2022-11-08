@@ -54,7 +54,7 @@
     }
 
     function submitForm(event) {
-        fetchData();
+        getProducts();
     }
 
     function clearForm(event){
