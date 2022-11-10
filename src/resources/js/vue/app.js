@@ -1,7 +1,12 @@
 import './bootstrap';
 
 import { createApp } from 'vue'
-import Shop from './Shop.vue'
+import Router from './router';
 
-const app = createApp(Shop)
+import Shop from './ShopMain.vue';
+
+const app = createApp(Shop);
+
+app.use(Router);
+
 app.mount('#shop');
