@@ -49,7 +49,7 @@ onBeforeMount(() => {
                     <h5 class="mb-1">{{ prod.name }}</h5>
                     <small>€ {{ prod.price }}</small>
                 </div>
-                <p class="mb-1">{{ prod.description }}</p>
+                <p class="mb-1" v-html="prod.description"></p>
             </RouterLink>
         </div>
     </div>
