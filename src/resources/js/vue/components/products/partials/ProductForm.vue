@@ -1,5 +1,6 @@
 <script setup>
-    import { computed } from 'vue';
+    import {  } from 'vue';
+    import EditorView from '../../../partials/EditorView.vue';
 
     const props = defineProps({
         product: {
@@ -42,11 +43,14 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control" id="description" rows="3" v-model="product.description"></textarea>
+            <!-- <textarea name="description" class="form-control" id="description" rows="3" v-model="product.description"></textarea> -->
+            <EditorView v-model="product.description"/>
         </div>
 
         <div class="mb-3">
             <button type="button" class="btn btn-primary" @click="formSubmit">Submit</button>
         </div>
     </div>
+
+
 </template>

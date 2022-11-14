@@ -59,8 +59,8 @@
                         class="card-text"
                         :class="{'fw-bold': styles.isBold, 'fst-italic': styles.isItalic}"
                         :style="{ fontSize: styles.fontSize + 'rem', color: styles.color }"
+                        v-html="product.description"
                     >
-                        {{ product.description }}
                     </p>
                     <p class="card-text"><small>€ {{ product.price }}</small></p>
                     <RouterLink :to="{name: 'products.edit', params: {product: product.id} }" class="btn btn-primary">Edit</RouterLink>

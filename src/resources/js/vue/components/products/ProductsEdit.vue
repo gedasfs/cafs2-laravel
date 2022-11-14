@@ -43,4 +43,5 @@
 
 <template>
     <ProductForm :product="product" :categories="categories" @onFormSubmit="updateProduct"/>
+
 </template>

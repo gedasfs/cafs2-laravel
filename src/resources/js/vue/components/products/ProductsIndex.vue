@@ -1,37 +1,37 @@
 <script setup>
-    import axios from 'axios';
-    import { ref, onBeforeMount } from 'vue';
-    import FilterProducts from './partials/FilterProducts.vue';
+import axios from 'axios';
+import { ref, onBeforeMount } from 'vue';
+import FilterProducts from './partials/FilterProducts.vue';
 
-    const productsIndexApiUrl = '/api/v1/products';
-    const categoriesIndexApiUrl = '/api/v1/categories';
+const productsIndexApiUrl = '/api/v1/products';
+const categoriesIndexApiUrl = '/api/v1/categories';
 
-    const products = ref([]);
-    const categories = ref([]);
+const products = ref([]);
+const categories = ref([]);
 
-    const loadProducts = async (filters = {}) => {
-        let productsIndexApiUrlWithFilters = productsIndexApiUrl;
+const loadProducts = async (filters = {}) => {
+    let productsIndexApiUrlWithFilters = productsIndexApiUrl;
 
-        productsIndexApiUrlWithFilters += filters.category ?  `?category_id=${filters.category}&` : '?' ;
-        productsIndexApiUrlWithFilters += filters.priceFrom ?  `price_from=${filters.priceFrom}&` : '' ;
-        productsIndexApiUrlWithFilters += filters.priceTo ?  `price_to=${filters.priceTo}&` : '' ;
-        productsIndexApiUrlWithFilters += filters.orderBy ? `order_by=${filters.orderBy}&` : '';
+    productsIndexApiUrlWithFilters += filters.category ?  `?category_id=${filters.category}&` : '?' ;
+    productsIndexApiUrlWithFilters += filters.priceFrom ?  `price_from=${filters.priceFrom}&` : '' ;
+    productsIndexApiUrlWithFilters += filters.priceTo ?  `price_to=${filters.priceTo}&` : '' ;
+    productsIndexApiUrlWithFilters += filters.orderBy ? `order_by=${filters.orderBy}&` : '';
 
-        let productsResponse = await axios.get(productsIndexApiUrlWithFilters);
+    let productsResponse = await axios.get(productsIndexApiUrlWithFilters);
 
-        products.value = productsResponse.data.data;
-    }
+    products.value = productsResponse.data.data;
+}
 
-    const loadCategories = async () => {
-        let categoriesResponse = await axios.get(categoriesIndexApiUrl);
+const loadCategories = async () => {
+    let categoriesResponse = await axios.get(categoriesIndexApiUrl);
 
-        categories.value = categoriesResponse.data.data;
-    }
+    categories.value = categoriesResponse.data.data;
+}
 
-    onBeforeMount(() => {
-        loadProducts();
-        loadCategories();
-    });
+onBeforeMount(() => {
+    loadProducts();
+    loadCategories();
+});
 
 </script>
 
