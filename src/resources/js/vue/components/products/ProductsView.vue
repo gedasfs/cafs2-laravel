@@ -40,7 +40,7 @@
         <div class="d-flex">
             <button class="btn btn-sm btn-outline-dark me-2" @click="styles.fontSize += 0.25">A+</button>
             <button class="btn btn-sm btn-outline-dark" @click="styles.fontSize < 0.75 ? styles.fontSize = 0.5 : styles.fontSize -= 0.25">A-</button>
-            <input class="form-control form-control-sm ms-2 border-dark p-1" type="color" id="switchColor" :value="styles.color" @input="event => styles.color = event.target.value">
+            <input role="button" title="Select Color" class="form-control form-control-sm ms-2 border-dark p-1" type="color" id="switchColor" :value="styles.color" @input="event => styles.color = event.target.value">
         </div>
     </div>
     <div v-if="product" class="card mb-3">
