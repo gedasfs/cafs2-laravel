@@ -1,12 +1,13 @@
 <script setup>
-
+    import Header from './partials/Header.vue';
+    import Footer from './partials/Footer.vue';
 </script>
 
 
 <template>
-    <div class="container mt-3">
-        <header class="mb-3">Header</header>
+    <div class="container d-flex flex-column min-vh-100">
+        <Header class="mb-4" />
         <RouterView></RouterView>
-        <!-- <footer>Footer</footer> -->
+        <Footer />
     </div>
 </template>

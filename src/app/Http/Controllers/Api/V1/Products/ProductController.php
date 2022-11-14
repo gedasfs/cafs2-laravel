@@ -6,6 +6,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Products\ProductResource;
+use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
 
 class ProductController extends Controller
 {
@@ -55,5 +57,28 @@ class ProductController extends Controller
 
         $prodCollection = ProductResource::collection($products);
         return $prodCollection;
+    }
+
+    public function view(Product $product)
+    {
+        return new ProductResource($product);
+    }
+
+    public function store(StoreProductRequest $request)
+    {
+        $product = new Product($request->only('name', 'code', 'price', 'category_id', 'description'));
+        $product->active = true;
+        $product->stock = 1;
+
+        $product->save();
+
+        return new ProductResource($product);
+    }
+
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $product->update($request->validated());
+
+        return new ProductResource($product);
     }
 }
