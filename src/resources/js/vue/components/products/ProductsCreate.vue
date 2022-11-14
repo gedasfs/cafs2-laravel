@@ -31,6 +31,6 @@
 </script>
 
 <template>
-    <ProductForm :product="{}" :categories="categories" @onFormSubmit="createProduct"/>
+    <ProductForm :product="{category_id: null}" :categories="categories" @onFormSubmit="createProduct"/>
 </template>
 

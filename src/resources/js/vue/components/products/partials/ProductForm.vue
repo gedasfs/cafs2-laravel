@@ -1,4 +1,5 @@
 <script setup>
+    import { computed } from 'vue';
 
     const props = defineProps({
         product: {
@@ -9,20 +10,17 @@
         },
     });
 
-    if (!props.product.category_id) {
-        props.product.category_id = 0;
-    }
-
     const emit = defineEmits(['onFormSubmit']);
 
     const formSubmit = () => {
         emit('onFormSubmit', props.product);
     };
 
+
 </script>
 
 <template>
-    <div>
+    <div v-if="props.product">
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input name="name" type="text" class="form-control" id="name" v-model="product.name">
@@ -38,7 +36,7 @@
         <div class="mb-3">
             <label for="categoryId" class="form-label">Product category</label>
             <select class="form-select" aria-label="category_id" name="category_id" id="categoryId" v-model="product.category_id">
-                <option value="0" disabled>Select Category</option>
+                <option value="null" disabled>Select Category</option>
                 <option v-for="category in categories" :value="category.id" :key="category.id" :selected="category.id == product.category_id ? true : false">{{ category.name }}</option>
             </select>
         </div>
