@@ -1,13 +1,11 @@
 <script setup>
-    import axios from 'axios';
-    import { onBeforeMount, reactive, ref } from 'vue';
+    import { onBeforeMount, reactive } from 'vue';
     import { useRoute } from 'vue-router';
+    import { useProductStore } from '@/stores/product.js'
 
     const route = useRoute();
+    const productStore = useProductStore();
 
-    const productApiUrl = `/api/v1/products/${route.params.product}`;
-
-    const product = ref(null);
     const styles = reactive({
         fontSize: 1,
         isBold: false,
@@ -15,14 +13,8 @@
         color: '#000000',
     });
 
-    const loadProduct = async () => {
-        let productResponse = await axios.get(productApiUrl);
-
-        product.value = productResponse.data.data;
-    };
-
-    onBeforeMount(() => {
-        loadProduct();
+    onBeforeMount(async () => {
+        await productStore.find(route.params.product);
     });
 </script>
 
@@ -43,7 +35,7 @@
             <input role="button" title="Select Color" class="form-control form-control-sm ms-2 border-dark p-1" type="color" id="switchColor" :value="styles.color" @input="event => styles.color = event.target.value">
         </div>
     </div>
-    <div v-if="product" class="card mb-3">
+    <div v-if="productStore.id" class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
                 <svg class="bd-placeholder-img img-fluid rounded-start" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -54,16 +46,16 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
+                    <h5 class="card-title">{{ productStore.name }}</h5>
                     <p
                         class="card-text"
                         :class="{'fw-bold': styles.isBold, 'fst-italic': styles.isItalic}"
                         :style="{ fontSize: styles.fontSize + 'rem', color: styles.color }"
-                        v-html="product.description"
+                        v-html="productStore.description"
                     >
                     </p>
-                    <p class="card-text"><small>€ {{ product.price }}</small></p>
-                    <RouterLink :to="{name: 'products.edit', params: {product: product.id} }" class="btn btn-primary">Edit</RouterLink>
+                    <p class="card-text"><small>€ {{ productStore.price }}</small></p>
+                    <RouterLink :to="{name: 'products.edit', params: {product: productStore.id} }" class="btn btn-primary">Edit</RouterLink>
                 </div>
             </div>
         </div>

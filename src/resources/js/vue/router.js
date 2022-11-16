@@ -2,8 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import ProductsIndex from './components/products/ProductsIndex.vue';
 import ProductsView from './components/products/ProductsView.vue';
-import ProductsCreate from './components/products/ProductsCreate.vue';
-import ProductsEdit from './components/products/ProductsEdit.vue';
+import ProductsForm from './components/products/ProductsForm.vue';
 
 const router = createRouter({
     history: createWebHistory('/vue'),
@@ -15,18 +14,18 @@ const router = createRouter({
             name: 'products.index'
         },
         {
+            path: '/products/create',
+            component: ProductsForm,
+            name: 'products.create'
+        },
+        {
             path: '/products/:product',
             component: ProductsView,
             name: 'products.view'
         },
         {
-            path: '/products/create',
-            component: ProductsCreate,
-            name: 'products.create'
-        },
-        {
             path: '/products/:product/edit',
-            component: ProductsEdit,
+            component: ProductsForm,
             name: 'products.edit'
         }
     ]

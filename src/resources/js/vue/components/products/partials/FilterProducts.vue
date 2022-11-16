@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, onMounted, reactive } from 'vue';
+import { onBeforeMount, reactive } from 'vue';
 
 const orderBy = {
     'date-desc': 'Newest first',

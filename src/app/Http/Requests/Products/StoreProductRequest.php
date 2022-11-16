@@ -19,7 +19,7 @@ class StoreProductRequest extends FormRequest
             'name' => ['required', 'string', 'min:5', 'max:255'],
             'code' => ['required', 'string', 'max:255', sprintf('unique:%s,code', Product::class)],
             'price' => ['required', 'numeric'],
-            'category_id' => ['required', 'numeric', 'gt:0', sprintf('exists:%s,id', Category::class)],
+            'category_id' => ['required', 'numeric', sprintf('exists:%s,id', Category::class)],
             'description' => ['required', 'string'],
         ];
     }

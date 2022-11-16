@@ -1,18 +1,14 @@
 <script setup>
-    import { onMounted, reactive, ref, watch } from 'vue';
-    import { debounce } from 'lodash';
-
+    import { reactive } from 'vue';
 
     const styles = reactive({
         color: '#ff0000',
     });
 
-
     defineProps({
         modelValue: String
     });
     const emit = defineEmits(['update:modelValue']);
-
 
     const changeColor = function(event) {
         styles.color = event.target.value;

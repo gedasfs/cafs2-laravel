@@ -1,48 +1,38 @@
 <script setup>
-import axios from 'axios';
-import { ref, onBeforeMount } from 'vue';
+import { onBeforeMount } from 'vue';
+import { useCategoriesStore } from '@/stores/categories.js'
+import { useProductsStore } from '@/stores/products.js'
 import FilterProducts from './partials/FilterProducts.vue';
 
-const productsIndexApiUrl = '/api/v1/products';
-const categoriesIndexApiUrl = '/api/v1/categories';
-
-const products = ref([]);
-const categories = ref([]);
+const categoriesStore = useCategoriesStore();
+const productsStore = useProductsStore();
 
 const loadProducts = async (filters = {}) => {
-    let productsIndexApiUrlWithFilters = productsIndexApiUrl;
+    let queryString = '';
 
-    productsIndexApiUrlWithFilters += filters.category ?  `?category_id=${filters.category}&` : '?' ;
-    productsIndexApiUrlWithFilters += filters.priceFrom ?  `price_from=${filters.priceFrom}&` : '' ;
-    productsIndexApiUrlWithFilters += filters.priceTo ?  `price_to=${filters.priceTo}&` : '' ;
-    productsIndexApiUrlWithFilters += filters.orderBy ? `order_by=${filters.orderBy}&` : '';
+    queryString += filters.category ? `category_id=${filters.category}&` : '' ;
+    queryString += filters.priceFrom ? `price_from=${filters.priceFrom}&` : '' ;
+    queryString += filters.priceTo ? `price_to=${filters.priceTo}&` : '' ;
+    queryString += filters.orderBy ? `order_by=${filters.orderBy}&` : '';
 
-    let productsResponse = await axios.get(productsIndexApiUrlWithFilters);
-
-    products.value = productsResponse.data.data;
+    await productsStore.load(queryString);
 }
 
-const loadCategories = async () => {
-    let categoriesResponse = await axios.get(categoriesIndexApiUrl);
-
-    categories.value = categoriesResponse.data.data;
-}
-
-onBeforeMount(() => {
-    loadProducts();
-    loadCategories();
+onBeforeMount(async () => {
+    await loadProducts();
+    await categoriesStore.load();
 });
 
 </script>
 
 <template>
-    <FilterProducts :categories="categories" @onFiltersChange="loadProducts"/>
+    <FilterProducts :categories="categoriesStore.categories" @onFiltersChange="loadProducts"/>
     <div class="d-flex mt-4">
         <h2>Products</h2>
         <RouterLink :to="{ name: 'products.create' }" class="btn btn-success ms-auto align-self-center">Create</RouterLink>
     </div>
-    <div class="list-group mt-2" v-if="products?.length > 0">
-        <div v-for="prod in products">
+    <div class="list-group mt-2" v-if="productsStore.products?.length > 0">
+        <div v-for="prod in productsStore.products">
             <RouterLink :to="{name: 'products.view', params: {product: prod.id} }" class="list-group-item list-group-item-action" aria-current="true">
                 <small># {{ prod.id }}</small>
                 <div class="d-flex w-100 justify-content-between">
